@@ -1,0 +1,6 @@
+/Users/redone/git/DevCodeCamp/Week_03/Projects/RPSLP-Game/RPSLS-Game/RPSLS-Game/bin/Debug/RPSLS-Game.exe
+/Users/redone/git/DevCodeCamp/Week_03/Projects/RPSLP-Game/RPSLS-Game/RPSLS-Game/bin/Debug/RPSLS-Game.pdb
+/Users/redone/git/DevCodeCamp/Week_03/Projects/RPSLP-Game/RPSLS-Game/RPSLS-Game/obj/x86/Debug/RPSLS-Game.csprojAssemblyReference.cache
+/Users/redone/git/DevCodeCamp/Week_03/Projects/RPSLP-Game/RPSLS-Game/RPSLS-Game/obj/x86/Debug/RPSLS-Game.csproj.CoreCompileInputs.cache
+/Users/redone/git/DevCodeCamp/Week_03/Projects/RPSLP-Game/RPSLS-Game/RPSLS-Game/obj/x86/Debug/RPSLS-Game.exe
+/Users/redone/git/DevCodeCamp/Week_03/Projects/RPSLP-Game/RPSLS-Game/RPSLS-Game/obj/x86/Debug/RPSLS-Game.pdb
