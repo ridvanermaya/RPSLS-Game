@@ -4,6 +4,8 @@ namespace RPSLSGame
     public class Human : Player
     {
         // member variables (has a)
+        public string player1Hand;
+        public string player2Hand;
 
         // constructor
         public Human()
@@ -15,15 +17,27 @@ namespace RPSLSGame
         // set user's name requiring input
         public string SetName()
         {
-            Console.WriteLine("Please enter your name:");
+            Console.Write("Please enter your name:");
             return name = Convert.ToString(Console.ReadLine());
         }
 
-        // player plays
-        public void PlayerPlay()
+        // player Inputs
+        public string PlayerInput()
         {
-            Console.WriteLine("Make your move! Type one of the following: 1:Rock, 2:Paper, 3:Scissors, 4:Lizard, and 5:Spock");
+            Console.WriteLine("\nMake your move! Type one of the following: 1:Rock, 2:Paper, 3:Scissors, 4:Lizard, and 5:Spock");
             string userInput = Convert.ToString(Console.ReadLine());
+            while (!ValidateHand(userInput))
+            {
+                ValidateHand(userInput);
+                Console.WriteLine("Invalid user input.\nPlease type one of the following: 1:Rock, 2:Paper, 3:Scissors, 4:Lizard, and 5:Spock");
+                userInput = Convert.ToString(Console.ReadLine());
+            }
+            return userInput;
+        }
+
+        // player plays
+        public void PlayerPlay(string userInput)
+        {
             switch (userInput)
             {
                 case "1":
@@ -42,7 +56,7 @@ namespace RPSLSGame
                     Console.WriteLine($"{name} played 'Spock'");
                     break;
                 default:
-                    Console.WriteLine("Given input is invalid! Please provide a number 1-6.");
+                    Console.WriteLine("Woops something unexpected happened!");
                     break;
             }
         }

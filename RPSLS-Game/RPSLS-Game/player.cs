@@ -35,11 +35,14 @@ namespace RPSLSGame
         //    Console.WriteLine($"{name} played {gesture}");
         //}
 
-        // generate random number
-        public int RandomNumber(int min, int max)
+        // validates user input
+        public bool ValidateHand(string input)
         {
-            Random random = new Random();
-            return random.Next(min, max);
+            if (input == "1" || input == "2" || input == "3" || input == "4" || input == "5")
+            {
+                return true;
+            }
+            return false;
         }
 
         // add gestures to gestures List
