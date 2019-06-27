@@ -1,31 +1,35 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace RPSLSGame
 {
     public class Game
     {
         // member variables (has a)
+        public List<string> GameRules;
+
         public Player player1;
         public Player player2;
+        public string player1Input;
+        public string player2Input;
+        public string player1Hand;
+        public string player2Hand;
         public bool validateHand;
         public bool validateYesNo;
-        string response;
-        public int player1Win;
-        public int player2Win;
-        Random random;
+        public string response;
 
         // consturctor
         public Game()
         {
-            random = new Random();
             GameStart();
             if (response == "yes")
             {
-                Console.WriteLine("Starting a multiplayer game...");
+                Console.WriteLine("\nStarting a multiplayer game...");
                 Multiplayer();
             }
             else
             {
-                Console.WriteLine("Starting a single player game...");
+                Console.WriteLine("\nStarting a single player game...");
                 SinglePlayer();
             }
         }
@@ -33,11 +37,12 @@ namespace RPSLSGame
         // member methods (can do)
         public string GameStart()
         {
+            AddGameRules();
             DisplayRules();
-            Console.WriteLine("\nWelcome to RPSLS Game. This game can be played against computer or with a friend.");
-            Console.WriteLine("\nWould you like to play against a friend? If yes type 'yes' if no please type 'no'");
+            Console.WriteLine("\nWelcome to RPSLS Game.");
+            Console.WriteLine("\nMultiplayer? If yes type 'yes' if no please type 'no'");
 
-            response = Console.ReadLine();
+            response = Console.ReadLine().ToLower();
             while (!ValidateYesNo(response))
             {
                 ValidateYesNo(response);
@@ -50,101 +55,68 @@ namespace RPSLSGame
         // When user chooses multiplayer
         public void Multiplayer()
         {
+            Console.Write("Please enter a name for player1: ");
             player1 = new Human();
+            Console.Write("Please enter a name for player2: ");
             player2 = new Human();
-            player1Win = 0;
-            player2Win = 0;
-            Console.WriteLine($"{player1.name} vs {player2.name}");
+            player1.currentScore = 0;
+            player2.currentScore = 0;
+            Console.Clear();
+            DisplayRules();
+            Console.WriteLine($"\n{player1.name} vs {player2.name}");
 
-            while(CheckForWin(player1Win, player2Win))
+            while (CheckForWin(player1.currentScore, player2.currentScore))
             {
-                string player1Input = player1.PlayerInput();
-                string player2Input = player2.PlayerInput();
-                string player1Hand = player1.PlayerPlay(player1Input);
-                string player2Hand = player2.PlayerPlay(player2Input);
+                player1.ChooseGesture();
+                player2.ChooseGesture();
 
-                if (player1Hand == player2Hand)
+                if (player1.gesture == player2.gesture)
                 {
-                    Console.WriteLine("Tie!");
-                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
-                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                    DisplayTieResult();
                 }
-                else if (player1Hand == "rock" && player2Hand == "scissors")
+                else if (player1.gesture == "rock" && player2.gesture == "scissors")
                 {
-                    Console.WriteLine($"{player1.name} wins!");
-                    player1Win++;
-                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
-                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                    DisplayPlayer1Win();
                 }
-                else if (player1Hand == "scissors" && player2Hand == "paper")
+                else if (player1.gesture == "scissors" && player2.gesture == "paper")
                 {
-                    Console.WriteLine($"{player1.name} wins!");
-                    player1Win++;
-                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
-                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                    DisplayPlayer1Win();
                 }
-                else if (player1Hand == "paper" && player2Hand == "rock")
+                else if (player1.gesture == "paper" && player2.gesture == "rock")
                 {
-                    Console.WriteLine($"{player1.name} wins!");
-                    player1Win++;
-                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
-                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                    DisplayPlayer1Win();
                 }
-                else if (player1Hand == "rock" && player2Hand == "lizard")
+                else if (player1.gesture == "rock" && player2.gesture == "lizard")
                 {
-                    Console.WriteLine($"{player1.name} wins!");
-                    player1Win++;
-                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
-                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                    DisplayPlayer1Win();
                 }
-                else if (player1Hand == "lizard" && player2Hand == "spock")
+                else if (player1.gesture == "lizard" && player2.gesture == "spock")
                 {
-                    Console.WriteLine($"{player1.name} wins!");
-                    player1Win++;
-                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
-                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                    DisplayPlayer1Win();
                 }
-                else if (player1Hand == "spock" && player2Hand == "scissors")
+                else if (player1.gesture == "spock" && player2.gesture == "scissors")
                 {
-                    Console.WriteLine($"{player1.name} wins!");
-                    player1Win++;
-                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
-                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                    DisplayPlayer1Win();
                 }
-                else if (player1Hand == "Scissors" && player2Hand == "lizard")
+                else if (player1.gesture == "Scissors" && player2.gesture == "lizard")
                 {
-                    Console.WriteLine($"{player1.name} wins!");
-                    player1Win++;
-                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
-                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                    DisplayPlayer1Win();
                 }
-                else if (player1Hand == "lizard" && player2Hand == "paper")
+                else if (player1.gesture == "lizard" && player2.gesture == "paper")
                 {
-                    Console.WriteLine($"{player1.name} wins!");
-                    player1Win++;
-                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
-                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                    DisplayPlayer1Win();
                 }
-                else if (player1Hand == "paper" && player2Hand == "spock")
+                else if (player1.gesture == "paper" && player2.gesture == "spock")
                 {
-                    Console.WriteLine($"{player1.name} wins!");
-                    player1Win++;
-                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
-                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                    DisplayPlayer1Win();
                 }
-                else if (player1Hand == "spock" && player2Hand == "rock")
+                else if (player1.gesture == "spock" && player2.gesture == "rock")
                 {
-                    Console.WriteLine($"{player1.name} wins!");
-                    player1Win++;
-                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
-                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                    DisplayPlayer1Win();
                 }
                 else
                 {
-                    Console.WriteLine($"{player2.name} wins!");
-                    player2Win++;
-                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
-                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
+                    DisplayPlayer2Win();
                 }
             }
 
@@ -153,112 +125,97 @@ namespace RPSLSGame
         // When user chooses single player
         private void SinglePlayer()
         {
+            Console.Write("Please enter a name for player1: ");
             player1 = new Human();
-            player2 = new AI(random);
-            player1Win = 0;
-            player2Win = 0;
-            Console.Write($"{player1.name} is playing against {player2.name}");
+            player2 = new Computer();
+            player1.currentScore = 0;
+            player2.currentScore = 0;
+            Console.Write($"{player1.name} vs {player2.name}");
 
-            while (CheckForWin(player1Win, player2Win))
+            while (CheckForWin(player1.currentScore, player2.currentScore))
             {
-                string playerInput = player1.PlayerInput();
-                string playerHand = player1.PlayerPlay(playerInput);
-                string computerHand = player2.ComputerPlay();
+                player1.ChooseGesture();
+                player2.RandomGesture();
 
-                if (playerHand == computerHand)
+                if (player1.gesture == player2.gesture)
                 {
-                    Console.WriteLine("Tie!");
-                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
-                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                    DisplayTieResult();
                 }
-                else if (playerHand == "rock" && computerHand == "scissors")
+                else if (player1.gesture == "rock" && player2.gesture == "scissors")
                 {
-                    Console.WriteLine($"{player1.name} wins!");
-                    player1Win++;
-                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
-                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                    DisplayPlayer1Win();
                 }
-                else if (playerHand == "scissors" && computerHand == "paper")
+                else if (player1.gesture == "scissors" && player2.gesture == "paper")
                 {
-                    Console.WriteLine($"{player1.name} wins!");
-                    player1Win++;
-                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
-                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                    DisplayPlayer1Win();
                 }
-                else if (playerHand == "paper" && computerHand == "rock")
+                else if (player1.gesture == "paper" && player2.gesture == "rock")
                 {
-                    Console.WriteLine($"{player1.name} wins!");
-                    player1Win++;
-                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
-                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                    DisplayPlayer1Win();
                 }
-                else if (playerHand == "rock" && computerHand == "lizard")
+                else if (player1.gesture == "rock" && player2.gesture == "lizard")
                 {
-                    Console.WriteLine($"{player1.name} wins!");
-                    player1Win++;
-                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
-                    Console.WriteLine($"{player2.name} has {player2Win} wins."); 
+                    DisplayPlayer1Win();
                 }
-                else if (playerHand == "lizard" && computerHand == "spock")
+                else if (player1.gesture == "lizard" && player2.gesture == "spock")
                 {
-                    Console.WriteLine($"{player1.name} wins!");
-                    player1Win++;
-                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
-                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                    DisplayPlayer1Win();
                 }
-                else if (playerHand == "spock" && computerHand == "scissors")
+                else if (player1.gesture == "spock" && player2.gesture == "scissors")
                 {
-                    Console.WriteLine($"{player1.name} wins!");
-                    player1Win++;
-                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
-                    Console.WriteLine($"{player2.name} has {player2Win} wins.");  
+                    DisplayPlayer1Win();
                 }
-                else if (playerHand == "Scissors" && computerHand == "lizard")
+                else if (player1.gesture == "Scissors" && player2.gesture == "lizard")
                 {
-                    Console.WriteLine($"{player1.name} wins!");
-                    player1Win++;
-                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
-                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                    DisplayPlayer1Win();
                 }
-                else if (playerHand == "lizard" && computerHand == "paper")
+                else if (player1.gesture == "lizard" && player2.gesture == "paper")
                 {
-                    Console.WriteLine($"{player1.name} wins!");
-                    player1Win++;
-                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
-                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                    DisplayPlayer1Win();
                 }
-                else if (playerHand == "paper" && computerHand == "spock")
+                else if (player1.gesture == "paper" && player2.gesture == "spock")
                 {
-                    Console.WriteLine($"{player1.name} wins!");
-                    player1Win++;
-                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
-                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                    DisplayPlayer1Win();
                 }
-                else if (playerHand == "spock" && computerHand == "rock")
+                else if (player1.gesture == "spock" && player2.gesture == "rock")
                 {
-                    Console.WriteLine($"{player1.name} wins!");
-                    player1Win++;
-                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
-                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                    DisplayPlayer1Win();
                 }
                 else
                 {
-                    Console.WriteLine($"{player2.name} wins!");
-                    player2Win++;
-                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
-                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
+                    DisplayPlayer2Win();
                 }
             }  
         }
 
-        public void DisplayRules()
+        // adds rules to GameRules list
+        public void AddGameRules()
         {
-            Console.WriteLine("Game Rules\n1. Scissors cut Paper, \n2. Paper covers Rock, \n3. Rock crushes Lizard," +
-                "\n4. Lizard poisons Spock, \n5. Spock smashes Scissors, \n6. Scissors decapitates Lizard," +
-                "\n7. Lizard eats Paper, \n8. Paper disproves Spock, \n9. Spock vaporizes Rock," +
-                "\n10. And as always Rock crushes Scissors.");
+            GameRules = new List<string>();
+            GameRules.Add("1. Scissors cut Paper");
+            GameRules.Add("2. Paper covers Rock");
+            GameRules.Add("3. Rock crushes Lizard");
+            GameRules.Add("4. Lizard poisons Spock");
+            GameRules.Add("5. Spock smashes Scissors");
+            GameRules.Add("6. Scissors decapitates Lizard");
+            GameRules.Add("7. Lizard eats Paper");
+            GameRules.Add("8. Paper disproves Spock");
+            GameRules.Add("9. Spock vaporizes Rock");
+            GameRules.Add("10. Rock crushes Scissors");
         }
 
+
+        // displayes game rules
+        public void DisplayRules()
+        {
+            Console.WriteLine("Game Rules\n");
+            foreach(string rule in GameRules)
+            {
+                Console.WriteLine(rule);
+            }
+        }
+
+        // validates user input for 'yes' and 'no' questions
         public bool ValidateYesNo(string input)
         {
             if (input.ToLower() == "yes" || input.ToLower() == "no")
@@ -268,15 +225,7 @@ namespace RPSLSGame
             return false;
         }
 
-        public bool ValidateHand(string input)
-        {
-            if (input == "1" || input == "2" || input == "3" || input == "4" || input == "5")
-            {
-                return true;
-            }
-            return false;
-        }
-
+        // checks if a player reached 2 wins to determine winner
         public bool CheckForWin(int player1Win, int player2Win)
         {
             if (player1Win >= 2 || player2Win >= 2)
@@ -292,6 +241,36 @@ namespace RPSLSGame
                 return false;
             }
             return true;
+        }
+
+        // displays result when it is 'tie'
+        public void DisplayTieResult()
+        {
+            Console.WriteLine($"\n{player1.name} and {player2.name} had {player1.gesture}");
+            Console.WriteLine("TIE");
+            DisplayCurrentScore();
+        }
+
+        // displays current score of each player
+        public void DisplayCurrentScore()
+        {
+            Console.WriteLine($"\n{player1.name} {player1.currentScore}:{player2.currentScore} {player2.name}");
+        }
+
+        // displays when player1 wins a round
+        public void DisplayPlayer1Win()
+        {
+            Console.WriteLine($"\n{player1.name} rolled {player1.gesture} and {player2.name} rolled {player2.gesture} \n{player1.name} wins the round!");
+            player1.currentScore++;
+            DisplayCurrentScore();
+        }
+
+        // displays when player2 wins a round
+        public void DisplayPlayer2Win()
+        {
+            Console.WriteLine($"\n{player1.name} rolled {player1.gesture} and {player2.name} rolled {player2.gesture} \n{player2.name} wins the round!");
+            player2.currentScore++;
+            DisplayCurrentScore();
         }
     }
 }

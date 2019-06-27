@@ -1,21 +1,17 @@
 ﻿using System;
 namespace RPSLSGame
 {
-    public class AI : Player
+    public class Computer : Player
     {
         // Member Variables (has a)
-        
-        
 
         // Constructor
-        public AI(Random random)
+        public Computer()
         {
-            this.random = random;
-            name = "Computer";
+            
         }
 
         // Members Methods (can do)
         // creates a random number
-        
     }
 }
