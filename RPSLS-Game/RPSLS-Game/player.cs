@@ -9,6 +9,10 @@ namespace RPSLSGame
         public string name;
         public List<string> Gestures = new List<string>();
         public string gesture;
+        public string player1Hand;
+        public string player2Hand;
+        public int randomNumber;
+        public Random random;
 
         // constructor
         public Player()
@@ -23,17 +27,81 @@ namespace RPSLSGame
             Console.WriteLine($"{name} won!");
         }
 
+        // player plays
+        public string PlayerPlay(string userInput)
+        {
+            switch (userInput)
+            {
+                case "1":
+                    Console.WriteLine($"{name} played 'Rock'");
+                    return gesture = "rock";
+                case "2":
+                    Console.WriteLine($"{name} played 'Paper'");
+                    return gesture = "paper";
+                case "3":
+                    Console.WriteLine($"{name} played 'Scissors'");
+                    return gesture = "scissors";
+                case "4":
+                    Console.WriteLine($"{name} played 'Lizard'");
+                    return gesture = "lizard";
+                case "5":
+                    Console.WriteLine($"{name} played 'Spock'");
+                    return gesture = "spock";
+                default:
+                    Console.WriteLine("Woops something unexpected happened!");
+                    return gesture = "";
+            }
+        }
+        public string ComputerPlay()
+        {
+            switch (Convert.ToString(RandomNumber()))
+            {
+                case "1":
+                    Console.WriteLine($"{name} played 'Rock'");
+                    return gesture = "rock";
+                case "2":
+                    Console.WriteLine($"{name} played 'Paper'");
+                    return gesture = "paper";
+                case "3":
+                    Console.WriteLine($"{name} played 'Scissors'");
+                    return gesture = "scissors";
+                case "4":
+                    Console.WriteLine($"{name} played 'Lizard'");
+                    return gesture = "lizard";
+                case "5":
+                    Console.WriteLine($"{name} played 'Spock'");
+                    return gesture = "spock";
+                default:
+                    Console.WriteLine("Woops something unexpected happened!");
+                    return gesture = "";
+            }
+        }
+
+        public int RandomNumber()
+        {
+            randomNumber = random.Next(1, 6);
+            return randomNumber;
+        }
+
+        // player Inputs
+        public string PlayerInput()
+        {
+            Console.WriteLine("\nMake your move! Type one of the following: 1:Rock, 2:Paper, 3:Scissors, 4:Lizard, and 5:Spock");
+            string userInput = Convert.ToString(Console.ReadLine());
+            while (!ValidateHand(userInput))
+            {
+                ValidateHand(userInput);
+                Console.WriteLine("Invalid user input.\nPlease type one of the following: 1:Rock, 2:Paper, 3:Scissors, 4:Lizard, and 5:Spock");
+                userInput = Convert.ToString(Console.ReadLine());
+            }
+            return userInput;
+        }
+
         // inform the user if loses
         public void Lose()
         {
             Console.WriteLine($"{name} lose!");
         }
-
-        // user play
-        //public void Play()
-        //{
-        //    Console.WriteLine($"{name} played {gesture}");
-        //}
 
         // validates user input
         public bool ValidateHand(string input)

@@ -4,15 +4,19 @@ namespace RPSLSGame
     public class Game
     {
         // member variables (has a)
-        public Human player;
-        public AI computer;
+        public Player player1;
+        public Player player2;
         public bool validateHand;
         public bool validateYesNo;
         string response;
+        public int player1Win;
+        public int player2Win;
+        Random random;
 
         // consturctor
         public Game()
         {
+            random = new Random();
             GameStart();
             if (response == "yes")
             {
@@ -50,13 +54,104 @@ namespace RPSLSGame
         }
 
         // When user chooses single player
-        public void SinglePlayer()
+        private void SinglePlayer()
         {
-            Human player1 = new Human();
-            AI computer = new AI();
-            Console.Write($"{player1.name} is playing against {computer.name}");
-            string playerInput = player1.PlayerInput();
-            player1.PlayerPlay(playerInput);
+            player1 = new Human();
+            player2 = new AI(random);
+            player1Win = 0;
+            player2Win = 0;
+            Console.Write($"{player1.name} is playing against {player2.name}");
+
+            while (CheckForWin(player1Win, player2Win))
+            {
+                string playerInput = player1.PlayerInput();
+                string playerHand = player1.PlayerPlay(playerInput);
+                string computerHand = player2.ComputerPlay();
+
+                if (playerHand == computerHand)
+                {
+                    Console.WriteLine("Tie!");
+                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
+                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                }
+                else if (playerHand == "rock" && computerHand == "scissors")
+                {
+                    Console.WriteLine($"{player1.name} wins!");
+                    player1Win++;
+                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
+                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                }
+                else if (playerHand == "scissors" && computerHand == "paper")
+                {
+                    Console.WriteLine($"{player1.name} wins!");
+                    player1Win++;
+                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
+                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                }
+                else if (playerHand == "paper" && computerHand == "rock")
+                {
+                    Console.WriteLine($"{player1.name} wins!");
+                    player1Win++;
+                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
+                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                }
+                else if (playerHand == "rock" && computerHand == "lizard")
+                {
+                    Console.WriteLine($"{player1.name} wins!");
+                    player1Win++;
+                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
+                    Console.WriteLine($"{player2.name} has {player2Win} wins."); 
+                }
+                else if (playerHand == "lizard" && computerHand == "spock")
+                {
+                    Console.WriteLine($"{player1.name} wins!");
+                    player1Win++;
+                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
+                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                }
+                else if (playerHand == "spock" && computerHand == "scissors")
+                {
+                    Console.WriteLine($"{player1.name} wins!");
+                    player1Win++;
+                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
+                    Console.WriteLine($"{player2.name} has {player2Win} wins.");  
+                }
+                else if (playerHand == "Scissors" && computerHand == "lizard")
+                {
+                    Console.WriteLine($"{player1.name} wins!");
+                    player1Win++;
+                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
+                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                }
+                else if (playerHand == "lizard" && computerHand == "paper")
+                {
+                    Console.WriteLine($"{player1.name} wins!");
+                    player1Win++;
+                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
+                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                }
+                else if (playerHand == "paper" && computerHand == "spock")
+                {
+                    Console.WriteLine($"{player1.name} wins!");
+                    player1Win++;
+                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
+                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                }
+                else if (playerHand == "spock" && computerHand == "rock")
+                {
+                    Console.WriteLine($"{player1.name} wins!");
+                    player1Win++;
+                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
+                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                }
+                else
+                {
+                    Console.WriteLine($"{player2.name} wins!");
+                    player2Win++;
+                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
+                }
+            }  
         }
 
         public void DisplayRules()
@@ -83,6 +178,25 @@ namespace RPSLSGame
                 return true;
             }
             return false;
+        }
+
+        public bool CheckForWin(int player1Win, int player2Win)
+        {
+            if (player1Win >= 2 || player2Win >= 2)
+            {
+                if (player1Win == 2)
+                {
+                    Console.WriteLine($"{player1.name} wins!");
+                    Console.WriteLine("Would you like to play again?");
+                }
+                else
+                {
+                    Console.WriteLine($"{player2.name} wins!");
+                    Console.WriteLine("Would you like to play again?");
+                }
+                return false;
+            }
+            return true;
         }
     }
 }

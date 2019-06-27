@@ -1,18 +1,18 @@
 ﻿<Properties StartupConfiguration="{1171B35B-E23F-4724-AC97-A42564A28670}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="RPSLS-Game/Player.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="RPSLS-Game/Program.cs">
     <Files>
-      <File FileName="RPSLS-Game/Program.cs" Line="9" Column="13" />
-      <File FileName="RPSLS-Game/Human.cs" Line="1" Column="1" />
-      <File FileName="RPSLS-Game/Ai.cs" Line="16" Column="1" />
-      <File FileName="RPSLS-Game/Game.cs" Line="9" Column="18" />
-      <File FileName="RPSLS-Game/Player.cs" Line="21" Column="26" />
+      <File FileName="RPSLS-Game/Program.cs" Line="11" Column="34" />
+      <File FileName="RPSLS-Game/Player.cs" Line="30" Column="10" />
+      <File FileName="RPSLS-Game/Game.cs" Line="56" Column="10" />
+      <File FileName="RPSLS-Game/Human.cs" Line="44" Column="61" />
+      <File FileName="RPSLS-Game/Ai.cs" Line="14" Column="34" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="RPSLS-Game" expanded="True">
             <Node name="RPSLS-Game" expanded="True">
-              <Node name="Player.cs" selected="True" />
+              <Node name="Program.cs" selected="True" />
             </Node>
           </Node>
         </State>
@@ -25,5 +25,5 @@
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.RPSLS-Game FirstBuild="True" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties.RPSLS-Game PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>
