@@ -50,6 +50,103 @@ namespace RPSLSGame
         // When user chooses multiplayer
         public void Multiplayer()
         {
+            player1 = new Human();
+            player2 = new Human();
+            player1Win = 0;
+            player2Win = 0;
+            Console.WriteLine($"{player1.name} vs {player2.name}");
+
+            while(CheckForWin(player1Win, player2Win))
+            {
+                string player1Input = player1.PlayerInput();
+                string player2Input = player2.PlayerInput();
+                string player1Hand = player1.PlayerPlay(player1Input);
+                string player2Hand = player2.PlayerPlay(player2Input);
+
+                if (player1Hand == player2Hand)
+                {
+                    Console.WriteLine("Tie!");
+                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
+                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                }
+                else if (player1Hand == "rock" && player2Hand == "scissors")
+                {
+                    Console.WriteLine($"{player1.name} wins!");
+                    player1Win++;
+                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
+                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                }
+                else if (player1Hand == "scissors" && player2Hand == "paper")
+                {
+                    Console.WriteLine($"{player1.name} wins!");
+                    player1Win++;
+                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
+                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                }
+                else if (player1Hand == "paper" && player2Hand == "rock")
+                {
+                    Console.WriteLine($"{player1.name} wins!");
+                    player1Win++;
+                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
+                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                }
+                else if (player1Hand == "rock" && player2Hand == "lizard")
+                {
+                    Console.WriteLine($"{player1.name} wins!");
+                    player1Win++;
+                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
+                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                }
+                else if (player1Hand == "lizard" && player2Hand == "spock")
+                {
+                    Console.WriteLine($"{player1.name} wins!");
+                    player1Win++;
+                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
+                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                }
+                else if (player1Hand == "spock" && player2Hand == "scissors")
+                {
+                    Console.WriteLine($"{player1.name} wins!");
+                    player1Win++;
+                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
+                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                }
+                else if (player1Hand == "Scissors" && player2Hand == "lizard")
+                {
+                    Console.WriteLine($"{player1.name} wins!");
+                    player1Win++;
+                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
+                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                }
+                else if (player1Hand == "lizard" && player2Hand == "paper")
+                {
+                    Console.WriteLine($"{player1.name} wins!");
+                    player1Win++;
+                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
+                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                }
+                else if (player1Hand == "paper" && player2Hand == "spock")
+                {
+                    Console.WriteLine($"{player1.name} wins!");
+                    player1Win++;
+                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
+                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                }
+                else if (player1Hand == "spock" && player2Hand == "rock")
+                {
+                    Console.WriteLine($"{player1.name} wins!");
+                    player1Win++;
+                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
+                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                }
+                else
+                {
+                    Console.WriteLine($"{player2.name} wins!");
+                    player2Win++;
+                    Console.WriteLine($"{player2.name} has {player2Win} wins.");
+                    Console.WriteLine($"{player1.name} has {player1Win} wins.");
+                }
+            }
 
         }
 
@@ -187,12 +284,10 @@ namespace RPSLSGame
                 if (player1Win == 2)
                 {
                     Console.WriteLine($"{player1.name} wins!");
-                    Console.WriteLine("Would you like to play again?");
                 }
                 else
                 {
                     Console.WriteLine($"{player2.name} wins!");
-                    Console.WriteLine("Would you like to play again?");
                 }
                 return false;
             }
