@@ -14,9 +14,6 @@ namespace RPSLSGame
         public string input;
         public string randomNumber;
 
-        //public int randomNumber;
-        //public Random random;
-
         // constructor
         public Player()
         {
@@ -89,7 +86,6 @@ namespace RPSLSGame
                 Console.WriteLine("\nInvalid user input.\nPlease type one of the following: 1:Rock \n2:Paper \n3:Scissors \nLizard \n5:Spock");
                 while (true)
                 {
-
                     var key = Console.ReadKey(true);
                     if (key.Key == ConsoleKey.Enter)
                         break;
@@ -98,7 +94,6 @@ namespace RPSLSGame
                 Convert.ToString(input);
                 ValidateHand(input);
             }
-            
             return input = Convert.ToString(input);
         }
 

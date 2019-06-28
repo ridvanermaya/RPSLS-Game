@@ -43,7 +43,6 @@ namespace RPSLSGame
                 Console.WriteLine("\nStarting a single player game...");
                 SinglePlayer();
             }
-
             StartNewGame();
         }
 
@@ -122,7 +121,6 @@ namespace RPSLSGame
             Console.Clear();
             DisplayRules();
             Console.WriteLine($"\n{player1.name} vs {player2.name}");
-
             CheckForRound();
         }
 
