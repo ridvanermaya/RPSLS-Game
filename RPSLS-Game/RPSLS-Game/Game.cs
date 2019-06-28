@@ -52,19 +52,8 @@ namespace RPSLSGame
             return response;
         }
 
-        // When user chooses multiplayer
-        public void Multiplayer()
+        public void CheckForRound()
         {
-            Console.Write("Please enter a name for player1: ");
-            player1 = new Human();
-            Console.Write("Please enter a name for player2: ");
-            player2 = new Human();
-            player1.currentScore = 0;
-            player2.currentScore = 0;
-            Console.Clear();
-            DisplayRules();
-            Console.WriteLine($"\n{player1.name} vs {player2.name}");
-
             while (CheckForWin(player1.currentScore, player2.currentScore))
             {
                 player1.ChooseGesture();
@@ -119,7 +108,22 @@ namespace RPSLSGame
                     DisplayPlayer2Win();
                 }
             }
+        }
 
+        // When user chooses multiplayer
+        public void Multiplayer()
+        {
+            Console.Write("Please enter a name for player1: ");
+            player1 = new Human();
+            Console.Write("Please enter a name for player2: ");
+            player2 = new Human();
+            player1.currentScore = 0;
+            player2.currentScore = 0;
+            Console.Clear();
+            DisplayRules();
+            Console.WriteLine($"\n{player1.name} vs {player2.name}");
+
+            CheckForRound();
         }
 
         // When user chooses single player
@@ -134,60 +138,7 @@ namespace RPSLSGame
             DisplayRules();
             Console.WriteLine($"\n{player1.name} vs {player2.name}");
 
-            while (CheckForWin(player1.currentScore, player2.currentScore))
-            {
-                player1.ChooseGesture();
-                player2.ChooseGesture();
-
-                if (player1.gesture == player2.gesture)
-                {
-                    DisplayTieResult();
-                }
-                else if (player1.gesture == "rock" && player2.gesture == "scissors")
-                {
-                    DisplayPlayer1Win();
-                }
-                else if (player1.gesture == "scissors" && player2.gesture == "paper")
-                {
-                    DisplayPlayer1Win();
-                }
-                else if (player1.gesture == "paper" && player2.gesture == "rock")
-                {
-                    DisplayPlayer1Win();
-                }
-                else if (player1.gesture == "rock" && player2.gesture == "lizard")
-                {
-                    DisplayPlayer1Win();
-                }
-                else if (player1.gesture == "lizard" && player2.gesture == "spock")
-                {
-                    DisplayPlayer1Win();
-                }
-                else if (player1.gesture == "spock" && player2.gesture == "scissors")
-                {
-                    DisplayPlayer1Win();
-                }
-                else if (player1.gesture == "Scissors" && player2.gesture == "lizard")
-                {
-                    DisplayPlayer1Win();
-                }
-                else if (player1.gesture == "lizard" && player2.gesture == "paper")
-                {
-                    DisplayPlayer1Win();
-                }
-                else if (player1.gesture == "paper" && player2.gesture == "spock")
-                {
-                    DisplayPlayer1Win();
-                }
-                else if (player1.gesture == "spock" && player2.gesture == "rock")
-                {
-                    DisplayPlayer1Win();
-                }
-                else
-                {
-                    DisplayPlayer2Win();
-                }
-            }  
+            CheckForRound();
         }
 
         // adds rules to GameRules list
@@ -262,7 +213,7 @@ namespace RPSLSGame
         // displays when player1 wins a round
         public void DisplayPlayer1Win()
         {
-            Console.WriteLine($"\n{player1.name} rolled {player1.gesture} and {player2.name} rolled {player2.gesture} \n{player1.name} wins the round!");
+            Console.WriteLine($"\n{player1.name} played {player1.gesture} and {player2.name} played {player2.gesture} \n{player1.name} wins the round!");
             player1.currentScore++;
             DisplayCurrentScore();
         }
@@ -270,7 +221,7 @@ namespace RPSLSGame
         // displays when player2 wins a round
         public void DisplayPlayer2Win()
         {
-            Console.WriteLine($"\n{player1.name} rolled {player1.gesture} and {player2.name} rolled {player2.gesture} \n{player2.name} wins the round!");
+            Console.WriteLine($"\n{player1.name} played {player1.gesture} and {player2.name} played {player2.gesture} \n{player2.name} wins the round!");
             player2.currentScore++;
             DisplayCurrentScore();
         }
