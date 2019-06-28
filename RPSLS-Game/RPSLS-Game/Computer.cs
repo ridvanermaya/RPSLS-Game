@@ -8,7 +8,7 @@ namespace RPSLSGame
         // Constructor
         public Computer()
         {
-            
+            name = "computer";
         }
 
         // Members Methods (can do)

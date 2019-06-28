@@ -130,7 +130,9 @@ namespace RPSLSGame
             player2 = new Computer();
             player1.currentScore = 0;
             player2.currentScore = 0;
-            Console.Write($"{player1.name} vs {player2.name}");
+            Console.Clear();
+            DisplayRules();
+            Console.WriteLine($"\n{player1.name} vs {player2.name}");
 
             while (CheckForWin(player1.currentScore, player2.currentScore))
             {
