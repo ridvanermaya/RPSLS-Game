@@ -137,7 +137,7 @@ namespace RPSLSGame
             while (CheckForWin(player1.currentScore, player2.currentScore))
             {
                 player1.ChooseGesture();
-                player2.RandomGesture();
+                player2.ChooseGesture();
 
                 if (player1.gesture == player2.gesture)
                 {
