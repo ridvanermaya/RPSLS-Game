@@ -65,20 +65,41 @@ namespace RPSLSGame
                     Console.WriteLine("Woops something unexpected happened!");
                     break;
             }
+            Console.Clear();
         }
 
         // player inputs
         public string PlayerInput()
         {
             Console.WriteLine("\nMake your move! Type one of the following numbers: \n1:Rock \n2:Paper \n3:Scissors \n4:Lizard \n5:Spock");
-            input = Convert.ToString(Console.ReadLine());
+            input = null;
+            while (true)
+            {
+                var key = Console.ReadKey(true);
+                if (key.Key == ConsoleKey.Enter)
+                    break;
+                input += key.KeyChar;
+            }
+
+            Convert.ToString(input);
+
             while (!ValidateHand(input))
             {
+                input = null;
+                Console.WriteLine("\nInvalid user input.\nPlease type one of the following: 1:Rock \n2:Paper \n3:Scissors \nLizard \n5:Spock");
+                while (true)
+                {
+
+                    var key = Console.ReadKey(true);
+                    if (key.Key == ConsoleKey.Enter)
+                        break;
+                    input += key.KeyChar;
+                }
+                Convert.ToString(input);
                 ValidateHand(input);
-                Console.WriteLine("Invalid user input.\nPlease type one of the following: 1:Rock, 2:Paper, 3:Scissors, 4:Lizard, and 5:Spock");
-                input = Convert.ToString(Console.ReadLine());
             }
-            return input;
+            
+            return input = Convert.ToString(input);
         }
 
         // validates user input for gesture

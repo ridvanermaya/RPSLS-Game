@@ -7,35 +7,19 @@ namespace RPSLSGame
     {
         // member variables (has a)
         public List<string> GameRules;
-
         public Player player1;
         public Player player2;
-        public string player1Input;
-        public string player2Input;
-        public string player1Hand;
-        public string player2Hand;
-        public bool validateHand;
         public bool validateYesNo;
         public string response;
 
         // consturctor
         public Game()
         {
-            GameStart();
-            if (response == "yes")
-            {
-                Console.WriteLine("\nStarting a multiplayer game...");
-                Multiplayer();
-            }
-            else
-            {
-                Console.WriteLine("\nStarting a single player game...");
-                SinglePlayer();
-            }
+
         }
 
         // member methods (can do)
-        public string GameStart()
+        public void GameStart()
         {
             AddGameRules();
             DisplayRules();
@@ -46,60 +30,76 @@ namespace RPSLSGame
             while (!ValidateYesNo(response))
             {
                 ValidateYesNo(response);
-                Console.WriteLine("Invalid response, Would you like to play against a friend? If yes type 'yes' if no please type 'no'");
-                response = Console.ReadLine();
+                Console.WriteLine("\nInvalid response, Multiplayer? If yes type 'yes' if no please type 'no'");
+                response = Console.ReadLine().ToLower();
             }
-            return response;
+            if (response == "yes")
+            {
+                Console.WriteLine("\nStarting a multiplayer game...");
+                Multiplayer();
+            }
+            else
+            {
+                Console.WriteLine("\nStarting a single player game...");
+                SinglePlayer();
+            }
+
+            StartNewGame();
+        }
+
+        public void StartNewGame()
+        {
+            Console.WriteLine("\nWould you like to play another game? [yes] or [no]");
+            response = Console.ReadLine().ToLower();
+            while (!ValidateYesNo(response))
+            {
+                ValidateYesNo(response);
+                Console.WriteLine("\nInvalid response, would you like to play another game?[yes] or [no]");
+                response = Console.ReadLine().ToLower();
+            }
+            if (response == "yes")
+            {
+                Console.Clear();
+                Console.WriteLine("\nStarting a new game...");
+                GameStart();
+            }
+            else
+            {
+                Console.WriteLine("\nGame over");
+            }
+
         }
 
         public void CheckForRound()
         {
             while (CheckForWin(player1.currentScore, player2.currentScore))
             {
+                Console.WriteLine($"\n{player1.name} choosing!");
                 player1.ChooseGesture();
+                Console.WriteLine($"\n{player2.name} choosing!");
                 player2.ChooseGesture();
 
                 if (player1.gesture == player2.gesture)
                 {
                     DisplayTieResult();
                 }
-                else if (player1.gesture == "rock" && player2.gesture == "scissors")
+                else if ((player1.gesture == "rock" && player2.gesture == "scissors") || (player1.gesture == "rock" && player2.gesture == "lizard"))
                 {
                     DisplayPlayer1Win();
                 }
-                else if (player1.gesture == "scissors" && player2.gesture == "paper")
+                else if ((player1.gesture == "scissors" && player2.gesture == "paper") || (player1.gesture == "scissors" && player2.gesture == "lizard"))
                 {
                     DisplayPlayer1Win();
                 }
-                else if (player1.gesture == "paper" && player2.gesture == "rock")
+                else if ((player1.gesture == "paper" && player2.gesture == "rock") || (player1.gesture == "paper" && player2.gesture == "spock"))
                 {
                     DisplayPlayer1Win();
                 }
-                else if (player1.gesture == "rock" && player2.gesture == "lizard")
+                else if ((player1.gesture == "lizard" && player2.gesture == "spock") || (player1.gesture == "lizard" && player2.gesture == "paper"))
                 {
                     DisplayPlayer1Win();
                 }
-                else if (player1.gesture == "lizard" && player2.gesture == "spock")
-                {
-                    DisplayPlayer1Win();
-                }
-                else if (player1.gesture == "spock" && player2.gesture == "scissors")
-                {
-                    DisplayPlayer1Win();
-                }
-                else if (player1.gesture == "Scissors" && player2.gesture == "lizard")
-                {
-                    DisplayPlayer1Win();
-                }
-                else if (player1.gesture == "lizard" && player2.gesture == "paper")
-                {
-                    DisplayPlayer1Win();
-                }
-                else if (player1.gesture == "paper" && player2.gesture == "spock")
-                {
-                    DisplayPlayer1Win();
-                }
-                else if (player1.gesture == "spock" && player2.gesture == "rock")
+                else if ((player1.gesture == "spock" && player2.gesture == "scissors") || (player1.gesture == "spock" && player2.gesture == "rock"))
                 {
                     DisplayPlayer1Win();
                 }
@@ -113,9 +113,9 @@ namespace RPSLSGame
         // When user chooses multiplayer
         public void Multiplayer()
         {
-            Console.Write("Please enter a name for player1: ");
+            Console.Write("\nPlease enter a name for player1: ");
             player1 = new Human();
-            Console.Write("Please enter a name for player2: ");
+            Console.Write("\nPlease enter a name for player2: ");
             player2 = new Human();
             player1.currentScore = 0;
             player2.currentScore = 0;
@@ -129,7 +129,7 @@ namespace RPSLSGame
         // When user chooses single player
         private void SinglePlayer()
         {
-            Console.Write("Please enter a name for player1: ");
+            Console.Write("\nPlease enter a name for player1: ");
             player1 = new Human();
             player2 = new Computer();
             player1.currentScore = 0;
@@ -156,7 +156,6 @@ namespace RPSLSGame
             GameRules.Add("9. Spock vaporizes Rock");
             GameRules.Add("10. Rock crushes Scissors");
         }
-
 
         // displayes game rules
         public void DisplayRules()
