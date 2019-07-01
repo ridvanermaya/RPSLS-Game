@@ -1,18 +1,18 @@
 ﻿<Properties StartupConfiguration="{1171B35B-E23F-4724-AC97-A42564A28670}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="RPSLS-Game/Computer.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="RPSLS-Game/Program.cs">
     <Files>
-      <File FileName="RPSLS-Game/Program.cs" Line="10" Column="39" />
-      <File FileName="RPSLS-Game/Player.cs" Line="8" Column="36" />
-      <File FileName="RPSLS-Game/Human.cs" Line="10" Column="23" />
-      <File FileName="RPSLS-Game/Game.cs" Line="164" Column="48" />
-      <File FileName="RPSLS-Game/Computer.cs" Line="5" Column="6" />
+      <File FileName="RPSLS-Game/Program.cs" Line="10" Column="33" />
+      <File FileName="RPSLS-Game/Player.cs" />
+      <File FileName="RPSLS-Game/Game.cs" />
+      <File FileName="RPSLS-Game/Human.cs" />
+      <File FileName="RPSLS-Game/Computer.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="RPSLS-Game" expanded="True">
             <Node name="RPSLS-Game" expanded="True">
-              <Node name="Computer.cs" selected="True" />
+              <Node name="Program.cs" selected="True" />
             </Node>
           </Node>
         </State>
